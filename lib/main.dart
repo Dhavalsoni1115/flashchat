@@ -18,14 +18,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: 'welcome_screen',
+      //home: ChatScreen(data: [],),
+      initialRoute: 'chat_screen',
       routes: {
         'welcome_screen': (context) => WelcomeScreen(),
         'login_screen': (context) =>
             const CommonPage(event: false, buttonName: 'Login'),
         'register_screen': (context) =>
             const CommonPage(event: true, buttonName: 'Register'),
-        'chat_screen': (context) => const ChatScreen(),
+        'chat_screen': (context) => ChatScreen(),
       },
     );
   }

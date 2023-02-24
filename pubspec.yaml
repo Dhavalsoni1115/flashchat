@@ -37,6 +37,7 @@ dependencies:
   animated_text_kit:
   cloud_firestore: 
   fluttertoast:
+  flutter_spinkit:
 dev_dependencies:
   flutter_test:
     sdk: flutter

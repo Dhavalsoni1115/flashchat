@@ -12,8 +12,7 @@ class WelcomeScreen extends StatefulWidget {
   State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen>
-    with SingleTickerProviderStateMixin {
+class _WelcomeScreenState extends State<WelcomeScreen> {
   // AnimationController? controller;
   // Animation? animation;
   @override
@@ -79,7 +78,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             Padding(
               padding: const EdgeInsets.only(top: 30),
               child: NavigationButton(
-                
                   name: 'Register',
                   onPress: () {
                     print('welcomeregister');
