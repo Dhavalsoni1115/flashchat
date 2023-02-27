@@ -1,14 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flashchat/screens/chat_screen.dart';
+import 'package:flashchat/screens/contact_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
 import 'firestoredata.dart';
+import 'message_screen.dart';
 import 'navigationbutton.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
 
-dynamic email, password, confirmPassword;
+dynamic name, email, password, confirmPassword;
 
 // TextEditingController email = TextEditingController();
 // TextEditingController password = TextEditingController();
@@ -40,24 +42,40 @@ class _CommonPageState extends State<CommonPage> {
                 child: Hero(
                   tag: 'logo',
                   child: SizedBox(
-                    height: 350,
+                    height: 300,
                     width: 100,
                     child: Image(
-                        image: AssetImage("assets/images/flash.png"),
-                        fit: BoxFit.cover),
+                      image: AssetImage("assets/images/flash.png"),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
-              SizedBox(
+               widget.event == true?SizedBox(
                 height: 60,
                 width: 300,
                 child: TextFormField(
                   //controller: email,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: textFieldDecorationEmail,
+               //   keyboardType: TextInputType.emailAddress,
+                  decoration: textFieldDecorationName,
                   onChanged: (value) {
-                    email = value;
+                    name = value;
                   },
+                ),
+              ):Container(),
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: SizedBox(
+                  height: 60,
+                  width: 300,
+                  child: TextFormField(
+                    //controller: email,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: textFieldDecorationEmail,
+                    onChanged: (value) {
+                      email = value;
+                    },
+                  ),
                 ),
               ),
               Padding(
@@ -99,7 +117,7 @@ class _CommonPageState extends State<CommonPage> {
                       if (widget.event == true) {
                         print('register');
                         if (password == confirmPassword) {
-                          addData(email, password);
+                          addData(name, email, password);
                           Navigator.pushNamed(context, 'login_screen');
                         } else {
                           Fluttertoast.showToast(
@@ -119,8 +137,10 @@ class _CommonPageState extends State<CommonPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      ChatScreen(),
+                                  builder: (context) => MessageScreen(loginEmail: data[i]['email'],userId: data[i]["id"],userName: data[i]['name'],),
+                                  // ContactScreen(
+                                  //   loginEmail: data[i]['email'],
+                                  // ),
                                 ));
                             break;
                           } else {

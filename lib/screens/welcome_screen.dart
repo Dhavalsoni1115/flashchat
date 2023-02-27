@@ -1,3 +1,4 @@
+import 'package:flashchat/screens/firestoredata.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
@@ -18,17 +19,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   void initState() {
     super.initState();
-    // controller = AnimationController(
-    //   duration: Duration(seconds: 1),
-    //   vsync: this,
-    //   //  upperBound: 100.0,
-    // );
-    // animation = CurvedAnimation(parent: controller!, curve: Curves.decelerate);
-    // controller!.forward();
-    // controller!.addListener(() {
-    //   setState(() {});
-    //   print(animation!.value);
-    // });
+   // getData();
   }
 
   @override

@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
 
+final textFieldDecorationName = InputDecoration(
+  border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+  hintText: "Name",
+  prefixIcon: Icon(
+    Icons.person_outlined,
+    color: Colors.black,
+  ),
+);
+
 final textFieldDecorationEmail = InputDecoration(
   border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
   hintText: "Email",

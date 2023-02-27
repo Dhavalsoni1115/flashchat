@@ -1,5 +1,6 @@
 import 'package:flashchat/screens/chat_screen.dart';
 import 'package:flashchat/screens/commonpage.dart';
+import 'package:flashchat/screens/message_screen.dart';
 import 'package:flashchat/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,15 +19,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      //home: ChatScreen(data: [],),
-      initialRoute: 'chat_screen',
+      home: WelcomeScreen(),
+      //initialRoute: 'welcome_screen',
       routes: {
         'welcome_screen': (context) => WelcomeScreen(),
         'login_screen': (context) =>
             const CommonPage(event: false, buttonName: 'Login'),
         'register_screen': (context) =>
             const CommonPage(event: true, buttonName: 'Register'),
-        'chat_screen': (context) => ChatScreen(),
+        // 'chat_screen': (context) => ChatScreen(loginEmail: ,),
       },
     );
   }
