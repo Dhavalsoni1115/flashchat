@@ -21,12 +21,12 @@ class ContactScreen extends StatefulWidget {
 class _ContactScreenState extends State<ContactScreen> {
   @override
   void initState() {
-    chatData();
+    getContact();
     super.initState();
   }
 
   List<dynamic> data = [];
-  Future<dynamic> chatData() async {
+  Future<dynamic> getContact() async {
     List<dynamic> data1 = await getData();
     setState(() {
       data = data1;

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -5,6 +6,8 @@ class ChatCard extends StatelessWidget {
   // final now = DateTime.now();
   //String currenttime = DateFormat('hh:mm a').format(DateTime.now());
   dynamic topRight, topLeft, bottomLeft, bottomRight, message, currenttime;
+  //Timestamp currenttime;
+  // DateTime currenttime;
   ChatCard({
     Key? key,
     this.bottomLeft,
@@ -29,17 +32,17 @@ class ChatCard extends StatelessWidget {
           borderSide: BorderSide.none),
       child: Container(
         margin: EdgeInsets.all(10),
-        // padding: EdgeInsets.all(5),
+        padding: EdgeInsets.all(5),
         height: 30,
         width: 250,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(message),
-            Text(
-              currenttime,
-              style: TextStyle(color: Colors.grey.shade500),
-            ),
+            // Text(
+            //   currenttime,
+            //   style: TextStyle(color: Colors.grey.shade500),
+            // ),
           ],
         ),
       ),

@@ -16,10 +16,11 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   // AnimationController? controller;
   // Animation? animation;
+  dynamic data;
   @override
   void initState() {
     super.initState();
-   // getData();
+   // getMessage();
   }
 
   @override
