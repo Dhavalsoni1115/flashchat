@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flashchat/screens/chat_screen.dart';
-import 'package:flashchat/screens/firestoredata.dart';
+import 'package:flashchat/data/firestoredata.dart';
 import 'package:flashchat/screens/message_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -25,16 +25,16 @@ class _ContactScreenState extends State<ContactScreen> {
     super.initState();
   }
 
-  List<dynamic> data = [];
+  List<dynamic> userData = [];
   Future<dynamic> getContact() async {
-    List<dynamic> data1 = await getData();
+    List<dynamic> userData1 = await getUserData();
     setState(() {
-      data = data1;
-      print(data);
+      userData = userData1;
+      print(userData);
     });
 
     //print(data);
-    return data;
+    return userData;
   }
 
   @override
@@ -51,7 +51,7 @@ class _ContactScreenState extends State<ContactScreen> {
           backgroundColor: Colors.orangeAccent.shade200,
         ),
         body: ListView.builder(
-          itemCount: data.length,
+          itemCount: userData.length,
           itemBuilder: (context, index) => Column(
             children: [
               GestureDetector(
@@ -64,12 +64,12 @@ class _ContactScreenState extends State<ContactScreen> {
                         userId: widget.userId,
                         userName: widget.userName,
                         userEmail: widget.loginEmail,
-                        personId: data[index]['id'],
-                        personEmail: data[index]['email'],
-                        personName: data[index]['name'],
+                        personId: userData[index]['id'],
+                        personEmail: userData[index]['email'],
+                        personName: userData[index]['name'],
                       ),
                     )),
-                child: data[index]["id"] != widget.userId
+                child: userData[index]["id"] != widget.userId
                     ? Container(
                         padding: EdgeInsets.all(10),
                         margin: EdgeInsets.all(15),
@@ -83,7 +83,7 @@ class _ContactScreenState extends State<ContactScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              data[index]['name'],
+                              userData[index]['name'],
                               style: TextStyle(fontSize: 17),
                             ),
                             Icon(Icons.arrow_forward_ios_rounded)

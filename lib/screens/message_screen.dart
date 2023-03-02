@@ -1,6 +1,6 @@
 import 'package:flashchat/screens/chat_screen.dart';
 import 'package:flashchat/screens/contact_screen.dart';
-import 'package:flashchat/screens/firestoredata.dart';
+import 'package:flashchat/data/firestoredata.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';

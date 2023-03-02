@@ -4,9 +4,9 @@ import 'package:flashchat/screens/contact_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
-import 'firestoredata.dart';
+import '../data/firestoredata.dart';
 import 'message_screen.dart';
-import 'navigationbutton.dart';
+import '../widgets/navigationbutton.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -130,7 +130,7 @@ class _CommonPageState extends State<CommonPage> {
                               fontSize: 16.0);
                         }
                       } else {
-                        dynamic data = await getData();
+                        dynamic data = await getUserData();
                         for (var i = 0; i <= data.length; i++) {
                           if (data[i]['email'] == email &&
                               data[i]['password'] == password) {

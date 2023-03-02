@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flashchat/screens/commonpage.dart';
-import 'package:flashchat/screens/firestoredata.dart';
+import 'package:flashchat/data/firestoredata.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'chat_card.dart';
+import '../widgets/chat_card.dart';
 
 class ChatScreen extends StatefulWidget {
   final dynamic personId, personName, personEmail, userId, userName, userEmail;
@@ -28,14 +28,17 @@ class _ChatScreenState extends State<ChatScreen> {
   dynamic message;
 
   //dynamic data = getMessage();
-  List<dynamic> data = [];
+  List<dynamic> chatData = [];
   Future<dynamic> getChat() async {
-    List<dynamic> data1 = await getMessage();
+    List<dynamic> chatData1 = await getMessage();
+    // List<dynamic> oldData = data1[0]['message'];
     setState(() {
-      data = data1;
+      chatData = chatData1;
     });
-    print(data);
-    return data;
+
+    print(chatData);
+    // print(chatData);
+    return chatData;
   }
 
   @override
@@ -47,6 +50,9 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    dynamic getPersonId = widget.personId + widget.userId;
+    dynamic getUserId = widget.userId + widget.personId;
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey.shade400,
@@ -66,47 +72,58 @@ class _ChatScreenState extends State<ChatScreen> {
           children: [
             Expanded(
               child: ListView.builder(
-                itemCount: data.length,
-                itemBuilder: (context, index) => Column(
-                  children: [
-                    Row(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                physics: ScrollPhysics(),
+                itemCount: chatData.length,
+                itemBuilder: (context, index) => Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    physics: ScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    itemCount: chatData[index]['message'].length,
+                    itemBuilder: (context, messageIndex) => Column(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(6),
-                          child: data[index]['participant1Id'] ==
-                                  widget.personId
-                              ? ChatCard(
-                                  topLeft: const Radius.circular(0),
-                                  topRight: const Radius.circular(20),
-                                  bottomLeft: const Radius.circular(20),
-                                  bottomRight: const Radius.circular(20),
-                                  message: data[index]['message'][index]['chat'],
-                                  currenttime: DateTime.now(),
-                                )
-                              : SizedBox(),
-                          // SizedBox(),
+                        Row(
+                          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            chatData[index]['id'] == getPersonId
+                                ? ChatCard(
+                                    topLeft: 0,
+                                    topRight: 20,
+                                    bottomLeft: 20,
+                                    bottomRight: 20,
+                                    message: chatData[index]['message']
+                                        [messageIndex]['chat'],
+                                    //  messageTime: ""
+                                    // DateTime(chatData[index]['message']
+                                    //     [messageIndex]['dateTime']),
+                                    // messageTime: chatData[index]['message']
+                                    //         [messageIndex]['dateTime']
+                                    //     .toString(),
+                                  )
+                                : chatData[index]['id'] == getUserId
+                                    ? Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 80),
+                                        child: ChatCard(
+                                          topLeft: 20,
+                                          topRight: 0,
+                                          bottomLeft: 20,
+                                          bottomRight: 20,
+                                          message: chatData[index]['message']
+                                              [messageIndex]['chat'],
+                                          // messageTime: chatData[index]['message']
+                                          //         [messageIndex]['dateTime']
+                                          //     .toString(),
+                                        ),
+                                      )
+                                    : SizedBox()
+                          ],
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          data[index]['participant1Id'] == widget.userId
-                              ? ChatCard(
-                                  topLeft: const Radius.circular(20),
-                                  topRight: const Radius.circular(0),
-                                  bottomLeft: const Radius.circular(20),
-                                  bottomRight: const Radius.circular(20),
-                                  message: data[index]['message'][index]['chat'],
-                                  currenttime: DateTime.now(),
-                                )
-                              : SizedBox(),
-                        ],
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
@@ -166,12 +183,13 @@ class _ChatScreenState extends State<ChatScreen> {
                 FloatingActionButton(
                   onPressed: () async {
                     try {
-                      //dynamic id = widget.userId + widget.personId;
-                      dynamic data = await getMessage();
-                      print(data);
+                      dynamic id = widget.userId + widget.personId;
+                      //dynamic chatData = await getMessage();
+                      print(chatData);
                       //print(await getMessage());
-                      //dynamic messagedata = data?[0]['message'];
-                      //print(data);
+                      //dynamic messagechatData = chatData?[0]['message'];
+                      //print(chatData);
+
                       addMessage(
                         id: widget.userId.toString() +
                             widget.personId.toString(),
@@ -180,7 +198,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         participant2Id: widget.personId.toString(),
                         participant2Name: widget.personName.toString(),
                         message: [
-                          ...data?[0]['message'],
+                          ...chatData[0]['message'],
                           {
                             'senderId': widget.userId.toString(),
                             'dateTime': DateTime.now(),

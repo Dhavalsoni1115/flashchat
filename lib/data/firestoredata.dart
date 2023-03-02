@@ -9,18 +9,18 @@ Future<dynamic> addData(String name, String email, String password) async {
   });
 }
 
-Future<dynamic> getData() async {
+Future<dynamic> getUserData() async {
   //List<dynamic> userId = [];
-  List<dynamic> allData = [];
+  List<dynamic> allUserData = [];
   QuerySnapshot querySnapshot = await db.collection('user').get();
   //userId = querySnapshot.docs.map((e) => e.id).toList();
-  allData = querySnapshot.docs.map((doc) {
-    dynamic data = doc.data();
-    return {"id": doc.id, ...data};
+  allUserData = querySnapshot.docs.map((doc) {
+    dynamic userData = doc.data();
+    return {"id": doc.id, ...userData};
   }).toList();
   // print(userId);
   // print(allData);
-  return allData;
+  return allUserData;
 }
 
 Future<dynamic> addMessage(
@@ -42,6 +42,7 @@ Future<dynamic> addMessage(
 Future<dynamic> getMessage() async {
   dynamic chatsData;
   QuerySnapshot querySnapshot = await db.collection('chats').get();
+  //.get();
   chatsData = querySnapshot.docs.map((doc) {
     dynamic data = doc.data();
     //dynamic data1 = doc.get(generateId);

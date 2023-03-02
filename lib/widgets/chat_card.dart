@@ -5,16 +5,18 @@ import 'package:intl/intl.dart';
 class ChatCard extends StatelessWidget {
   // final now = DateTime.now();
   //String currenttime = DateFormat('hh:mm a').format(DateTime.now());
-  dynamic topRight, topLeft, bottomLeft, bottomRight, message, currenttime;
+  double topRight, topLeft, bottomLeft, bottomRight;
+  dynamic message;
+  dynamic messageTime;
   //Timestamp currenttime;
   // DateTime currenttime;
   ChatCard({
     Key? key,
-    this.bottomLeft,
-    this.bottomRight,
-    this.topLeft,
-    this.topRight,
-    this.currenttime,
+    required this.bottomLeft,
+    required this.bottomRight,
+    required this.topLeft,
+    required this.topRight,
+    this.messageTime,
     this.message,
   }) : super(key: key);
 
@@ -24,10 +26,10 @@ class ChatCard extends StatelessWidget {
       elevation: 5,
       shape: OutlineInputBorder(
           borderRadius: BorderRadius.only(
-            topRight: topRight,
-            topLeft: topLeft,
-            bottomLeft: bottomLeft,
-            bottomRight: bottomRight,
+            topRight: Radius.circular(topRight),
+            topLeft: Radius.circular(topLeft),
+            bottomLeft: Radius.circular(bottomLeft),
+            bottomRight: Radius.circular(bottomRight),
           ),
           borderSide: BorderSide.none),
       child: Container(
@@ -38,9 +40,9 @@ class ChatCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(message),
+            Text(message.toString()),
             // Text(
-            //   currenttime,
+            //   messageTime,
             //   style: TextStyle(color: Colors.grey.shade500),
             // ),
           ],
